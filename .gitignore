@@ -1,0 +1,30 @@
+
+# Environment variables
+.env
+
+# Temporary files
+bitbucket_cloned_repos/
+
+# virtual environments
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
