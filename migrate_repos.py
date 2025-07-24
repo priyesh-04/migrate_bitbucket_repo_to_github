@@ -49,3 +49,23 @@ def fetch_bitbucket_repositories():
             print(f"Error fetching Bitbucket repositories: {response.json()}")
             break
     return repos
+
+
+def create_github_repo(repo_name, private=True):
+    """Create a new repository on GitHub using the GitHub API."""
+    url = f'https://api.github.com/user/repos'
+    headers = {
+        'Authorization': f'token {GITHUB_TOKEN}',
+        'Content-Type': 'application/json'
+    }
+    data = {
+        'name': repo_name,
+        'private': private,
+    }
+    
+    response = requests.post(url, json=data, headers=headers)
+    
+    if response.status_code == 201:
+        print(f"Successfully created GitHub repository: {repo_name}")
+    else:
+        print(f"Error creating GitHub repository {repo_name}: {response.json()}")
