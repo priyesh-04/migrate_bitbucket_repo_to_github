@@ -32,3 +32,20 @@ def run_command(command, cwd=None):
     else:
         print(result.stdout)
         return True
+    
+
+def fetch_bitbucket_repositories():
+    """Fetch all repositories from Bitbucket using pagination."""
+    url = f'https://api.bitbucket.org/2.0/repositories/{BITBUCKET_USER}'
+    repos = []
+    while url:
+        response = requests.get(url, auth=(BITBUCKET_USER, BITBUCKET_TOKEN))
+        if response.status_code == 200:
+            data = response.json()
+            repos.extend([repo['name'] for repo in data['values']])
+            # Get the next page URL if exists
+            url = data.get('next', None)
+        else:
+            print(f"Error fetching Bitbucket repositories: {response.json()}")
+            break
+    return repos
